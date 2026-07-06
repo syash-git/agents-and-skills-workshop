@@ -27,14 +27,21 @@ By the end of this workshop you will be able to:
 
 ## Section 1 — Setup (5 min)
 
-### 1.1 Create a scratch project
+### 1.1 Clone the workshop repo
 
 ```bash
-mkdir copilot-agents-skills-lab
-cd copilot-agents-skills-lab
+git clone https://github.com/syash-git/agents-and-skills-workshop.git
+cd agents-and-skills-workshop
 ```
 
-Create the two folders Copilot will look in for custom agents and skills:
+You'll be working directly in this folder. The two folders Copilot looks in for custom agents and skills live right here alongside the starter files:
+
+```
+.github/agents/
+.github/skills/
+```
+
+If they don't already exist in the clone, create them:
 
 ```bash
 mkdir -p .github/agents
@@ -168,7 +175,7 @@ module.exports = { addBook, findBook, removeBook };
 
 </details>
 
-You now have a scratch project, empty `.github/agents/` and `.github/skills/` folders, and one starter file. That's the whole setup.
+You now have the workshop repo cloned, `.github/agents/` and `.github/skills/` folders ready, and one starter file. That's the whole setup.
 
 ---
 
@@ -441,4 +448,4 @@ Take two minutes to think about (or discuss with the person next to you):
 - **Write a second skill.** A `commit-message` skill (matches "write a commit message" prompts) or a `pr-description` skill are great next ones. Keep the `description` specific.
 - **Add MCP.** Once you're comfortable with agents and skills, look into MCP servers to give Copilot access to external tools (issue trackers, databases, docs) inside the same customization model.
 
-You now have a working `code-reviewer` agent and a `code-checklist` skill in your scratch project. Copy them into a real repo whenever you're ready.
+You now have a working `code-reviewer` agent and a `code-checklist` skill in the workshop repo. Copy them into a real repo whenever you're ready.

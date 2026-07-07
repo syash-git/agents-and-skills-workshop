@@ -25,32 +25,23 @@ By the end of this workshop you will be able to:
 
 ---
 
-## Section 1 — Setup (5 min)
+## Setup (5 min)
 
-### 1.1 Clone the workshop repo
+### Clone the workshop repo
 
 ```bash
 git clone https://github.com/syash-git/agents-and-skills-workshop.git
 cd agents-and-skills-workshop
 ```
 
-You'll be working directly in this folder. The two folders Copilot looks in for custom agents and skills live right here alongside the starter files:
-
-```
-.github/agents/
-.github/skills/
-```
-
-If they don't already exist in the clone, create them:
+You'll be working directly in this folder. Copilot looks for custom agents and skills in two folders that **do not exist yet** in the clone — you'll create them now:
 
 ```bash
 mkdir -p .github/agents
 mkdir -p .github/skills
 ```
 
-> **Jargon check.** *Agent* = a persona Copilot adopts (e.g., "act as a code reviewer"). *Skill* = a reusable playbook Copilot pulls in automatically when your prompt matches it (e.g., "run this quality checklist"). We will build one of each in this workshop.
-
-### 1.2 Pick your language and paste the starter file
+### Pick your language and paste the starter file
 
 The **only** language-specific thing in this workshop is a small starter file we will ask Copilot to review. All three versions are equivalent: same domain (a tiny "book collection" module), same three deliberate issues:
 
@@ -179,9 +170,9 @@ You now have the workshop repo cloned, `.github/agents/` and `.github/skills/` f
 
 ---
 
-## Section 2 — Concepts: Agents vs Skills (10 min)
+## Concepts: Agents vs Skills (10 min)
 
-### 2.1 The analogy: a specialist + a checklist
+### The analogy: a specialist + a checklist
 
 Imagine you're hiring help for a code review.
 
@@ -191,7 +182,7 @@ Imagine you're hiring help for a code review.
 
 Now imagine giving the specialist your checklist. Same person, sharper output. That's what this workshop builds.
 
-### 2.2 The mental model
+### The mental model
 
 | Thing | What it is | When Copilot uses it | Where it lives |
 |---|---|---|---|
@@ -204,7 +195,7 @@ Two key takeaways:
 1. **You pick the agent. Copilot picks the skill.** Agents are opt-in per session; skills auto-trigger based on how well your prompt matches their `description`.
 2. **They compose.** An agent is *who* Copilot is; a skill is *what procedure* it follows. Nothing stops both from applying at once.
 
-### 2.3 Where the files go
+### Where the files go
 
 Everything in this workshop lives in your project's `.github/` folder, which means:
 
@@ -213,292 +204,18 @@ Everything in this workshop lives in your project's `.github/` folder, which mea
 
 ---
 
-## Section 3 — Lab A: Build a `code-reviewer` agent (15 min)
-
-### 3.1 What you're building
-
-A persona that tells Copilot: *"You are a senior engineer doing a code review. Focus on real correctness issues. Be direct, not fluffy."* When we invoke this agent later, Copilot's tone and priorities will shift compared to the default.
-
-### 3.2 Create the agent file
-
-Save the following as `.github/agents/code-reviewer.md`:
-
-```markdown
----
-name: code-reviewer
-description: A senior engineer who reviews code for correctness, safety, and readability. Direct, specific, no fluff.
----
-
-# Code Reviewer
-
-You are acting as a senior software engineer performing a code review.
-
-## How you review
-
-- Read the code carefully before commenting.
-- Focus on issues that would matter in production: correctness bugs, unsafe error handling, missing input validation, race conditions, and code that will be hard for a teammate to change safely.
-- Ignore purely stylistic preferences unless they hurt readability.
-- Prefer concrete suggestions ("replace X with Y because Z") over vague ones ("consider improving this").
-
-## How you respond
-
-- Group findings by severity: **Bugs** (definitely wrong), **Risks** (probably wrong or fragile), **Improvements** (nice to have).
-- For each finding, show the offending snippet and a suggested fix.
-- If the code looks fine, say so — do not invent issues to seem thorough.
-```
-
-> **Jargon check.** The block between the `---` lines is **YAML frontmatter**: structured metadata Copilot reads to register the agent. The `name` is how you refer to it; the `description` is what Copilot shows in menus.
-
-### 3.3 Try it out
-
-First, get a **baseline** with the default agent so you have something to compare against. In the project folder:
-
-```bash
-copilot
-```
-
-Then at the prompt (adjust the filename to whichever starter you picked):
-
-```
-Review books.py and tell me what you think.
-```
-
-Read the response and note two or three things about it — probably a mix of style comments, general advice, and some correctness notes.
-
-Now switch to your custom agent without leaving the session. Run the `/agent` command to browse and pick `code-reviewer` (or type `/agent code-reviewer` to select it directly). Then ask the same question:
-
-```
-Review books.py and tell me what you think.
-```
-
-### 3.4 What to look for
-
-Regardless of which language you chose, the `code-reviewer` response should feel noticeably different from the baseline:
-
-- Findings are **grouped by severity** (Bugs / Risks / Improvements) instead of a flat list.
-- The bare `catch`/`except` block is called out as a **Bug** or **Risk**, not brushed past.
-- The missing input validation on `title` and the case-insensitivity inconsistency in the search function are flagged specifically.
-- The tone is more direct — fewer hedges like "you might want to consider".
-
-If the output is still generic, double-check that you actually selected `code-reviewer` with `/agent` (Copilot shows the active agent in the prompt).
 
 ---
 
-## Section 4 — Lab B: Build a `code-checklist` skill (15 min)
+## Workshop modules
 
-### 4.1 What you're building
+The hands-on labs live in the [`modules/`](./modules) folder. Work through them in order for the full workshop, or jump straight to the topic you want.
 
-A **skill** — a written checklist Copilot will pull in automatically whenever your prompt looks like a code-quality request. Unlike an agent, you won't select it manually; a well-written `description` field does the matching.
+| # | Module | Time | What you'll build |
+|---|---|---|---|
+| 1 | [Build a custom agent](./modules/01-custom-agent.md) | 15 min | A `code-reviewer` agent — a persona that changes *how* Copilot responds. |
+| 2 | [Build a custom skill](./modules/02-custom-skill.md) | 15 min | A `code-checklist` skill — a playbook Copilot auto-triggers on quality prompts. |
+| 3 | [Combine agent + skill](./modules/03-combine-agent-and-skill.md) | 10 min | Run both on one task and watch them compose. |
+| 4 | [Use the GitHub MCP server](./modules/04-mcp-server.md) | 10 min | Reach real GitHub from Copilot CLI: list issues, fix one, open a PR. |
 
-### 4.2 Create the skill file
-
-Skills live in a folder named after the skill, containing a `SKILL.md`. Create both:
-
-```bash
-mkdir -p .github/skills/code-checklist
-```
-
-Then save the following as `.github/skills/code-checklist/SKILL.md`:
-
-```markdown
----
-name: code-checklist
-description: Team code quality checklist. Use whenever the user asks for a code review, quality check, or pre-merge review of source code in any language.
----
-
-# Code Quality Checklist
-
-When invoked, walk through **every** item below for the code in question and report findings. Do not skip categories even if nothing is wrong — say "no issues found" for that category so the reader knows it was checked.
-
-## 1. Input validation
-
-- Are inputs checked for null / empty / wrong type before use?
-- Are numeric ranges and string lengths validated where they matter?
-
-## 2. Error handling
-
-- Are exceptions / errors caught **specifically**, not with a catch-all that hides bugs?
-- Are error paths tested or at least logged?
-- Are resources (files, connections) released on the error path?
-
-## 3. Correctness
-
-- Do loops terminate under all conditions?
-- Are collections mutated safely while being iterated?
-- Are comparisons (equality, case-sensitivity) consistent?
-
-## 4. Readability & maintainability
-
-- Are names descriptive (a new teammate could guess what they mean)?
-- Are functions short enough to fit on one screen?
-- Are magic numbers / strings named as constants?
-
-## 5. Testability
-
-- Could this be unit-tested without heavy mocking?
-- Are side effects (I/O, global state) isolated from pure logic?
-
-## Output format
-
-Return a single Markdown report with one section per category above, in the same order. End with a one-line **Summary** stating overall assessment (`Good`, `Needs work`, or `Blocking issues`).
-```
-
-> **Why the `description` matters.** Skills auto-trigger. Copilot compares your prompt to each skill's `description` and loads matching skills into context. A vague description like "helps with code" won't trigger reliably; a specific one like the above will. This is the most important part of a skill file.
-
-### 4.3 Try it out
-
-Start a fresh conversation (this time **without** a custom agent — we want to see the skill acting on its own). From your existing session, run `/new` to clear history, then `/agent` and pick the default agent so `code-reviewer` isn't active.
-
-Ask a request that clearly matches the skill's `description`:
-
-```
-Do a code quality check on books.py.
-```
-
-### 4.4 What to look for
-
-- Copilot's response should be **structured exactly like the checklist**: five numbered sections in order, ending with a one-line **Summary**.
-- Categories with no issues should say "no issues found" — not be omitted.
-- You can confirm the skill loaded by running `/skills` inside the session; `code-checklist` should be listed as available, and Copilot will typically mention which skills it used.
-
-If the response ignores the checklist structure, your prompt probably didn't match the `description` closely enough. Try phrasing more like the description ("code review", "quality check", "pre-merge review") and rerun.
-
----
-
-## Section 5 — Lab C: Combine the agent and the skill (10 min)
-
-### 5.1 The whole point of this workshop
-
-So far you have:
-
-- An **agent** (`code-reviewer`) that shapes *how Copilot thinks* — persona, tone, severity grouping.
-- A **skill** (`code-checklist`) that gives Copilot *a specific procedure to follow* — the five-category checklist.
-
-Now let's run both at once.
-
-### 5.2 Try it
-
-Switch to the agent with `/agent code-reviewer` (or run `/agent` and pick it from the list). Then ask:
-
-```
-Do a code review of books.py against our team quality checklist.
-```
-
-Notice the prompt: it says both "code review" (the agent's job) and "team quality checklist" (matches the skill's `description`). This gives Copilot every signal it needs.
-
-### 5.3 What to look for
-
-You should see the two customizations **compose**:
-
-- The **structure** comes from the skill: five numbered categories in the fixed order, followed by a Summary line.
-- The **voice** comes from the agent: direct, specific, no fluff, concrete suggested fixes.
-- Findings inside each category are labeled with the agent's severity vocabulary (**Bug / Risk / Improvement**) even though the skill didn't define those.
-
-That blend — a persona following a playbook — is exactly what agents + skills are for. Neither one alone would give you both.
-
-### 5.4 Quick discussion prompts
-
-Take two minutes to think about (or discuss with the person next to you):
-
-1. If you kept just one of the two, which would you keep for daily code reviews? Why?
-2. What would you have to write into a single monolithic prompt every time to get the same effect without agents or skills?
-3. Whose review of your PRs at work could this replace — or, more realistically, augment?
-
----
-
-## Section 6 — Wrap-up (5 min)
-
-### 6.1 Key takeaways
-
-- **Agent = persona.** You opt in with `/agent`. Changes *how* Copilot responds.
-- **Skill = playbook.** Auto-triggers via its `description`. Changes *what procedure* Copilot follows.
-- **They compose.** Selecting an agent doesn't disable skills — matching skills still load on top.
-- The `description` field is the most important line in a skill file. Vague descriptions don't trigger.
-- Project-local (`.github/` inside the repo) means your team gets the same behavior. User-level (`~/.copilot/`) means you get it in every project.
-
-### 6.2 When do I reach for which?
-
-| Situation | Reach for |
-|---|---|
-| I want Copilot to sound like a specific role (reviewer, tutor, ops engineer) | Agent |
-| I want Copilot to follow the exact same procedure every time a certain kind of task comes up | Skill |
-| A whole team should get the same behavior without thinking about it | Skill (auto-triggers) + commit both files to the repo |
-| I want to swap between very different working modes in one session | Multiple agents |
-| I want one canonical checklist that many prompts can pull in | One skill, precise `description` |
-
-### 6.3 Next steps (pick one)
-
-- **Share with your team.** Commit `.github/agents/` and `.github/skills/` in a real project. Everyone who clones gets your customizations for free.
-- **Write a second skill.** A `commit-message` skill (matches "write a commit message" prompts) or a `pr-description` skill are great next ones. Keep the `description` specific.
-- **Add MCP.** Once you're comfortable with agents and skills, jump into **[Section 7 — Lab D](#section-7--lab-d-use-the-github-mcp-server-10-min)** to give Copilot access to real GitHub (issues, PRs, code search) via the built-in GitHub MCP server.
-
----
-
-## Section 7 — Lab D: Use the GitHub MCP server (10 min)
-
-### 7.1 What you're building
-
-Agents changed *how* Copilot thinks; skills changed *what procedure* it follows. Now let's change *what Copilot can reach*. In this lab you'll turn on the built-in **GitHub MCP server** in Copilot CLI, ask it to browse this workshop repo's issues, and drive an end-to-end fix: find an issue → edit code → open a PR — all from inside the same terminal session.
-
-### 7.2 Enable the GitHub MCP server
-
-Exit any running Copilot session, then start a new one with all GitHub MCP tools turned on:
-
-```bash
-copilot --enable-all-github-mcp-tools
-```
-
-Confirm the server is loaded and the full toolset is available:
-
-```
-/mcp show github-mcp-server
-```
-
-You should see the server listed with roughly 100 tools (e.g., `list_issues`, `create_pull_request`, `get_file_contents`, `search_code`, `create_issue`).
-
-> **Heads up.** MCP tool calls run **with your GitHub permissions**. Copilot will ask you to approve each call the first time. Read what it's about to do before clicking through — especially for write operations like `create_pull_request` or `create_issue`.
-
-### 7.3 Find an issue to fix
-
-This repo has a handful of open issues that map directly to the deliberate bugs in the `books` starter file you picked in Section 1. Ask Copilot to browse them:
-
-```
-List the open issues on this repository and summarize them.
-```
-
-Notice which tool Copilot calls (it should be `list_issues`). Then let Copilot triage for you:
-
-```
-Which of these issues would be the easiest to fix? Pick one for me.
-```
-
-### 7.4 Fix it and open a PR
-
-Now ask Copilot to do the whole loop — code change, commit, push, PR — in one prompt. Adjust the filename to whichever starter you're working in (`books.py` / `Books.cs` / `books.js`):
-
-```
-Fix that issue. Follow these steps:
-1. Check out a new local branch for the fix.
-2. Make the changes to books.py (adjust for your language).
-3. Run the code (or a quick manual check) to confirm the fix works.
-4. Commit and push the branch.
-5. Open a pull request that references the issue in its body (e.g., "Closes #N").
-```
-
-> ⚠️ **Review every write.** Copilot will call `create_pull_request` (and possibly `create_or_update_file`) via MCP. Read the diff summary and the PR title/body it proposes before approving.
-
-### 7.5 What to look for
-
-- Copilot narrates its **MCP tool calls** as it goes (`list_issues`, `get_file_contents`, `create_pull_request`, etc.). That's the MCP client at work — no glue code required from you.
-- The PR appears on GitHub, linked to the issue via `Closes #N`.
-- If you also select the `code-reviewer` agent from Lab A **before** asking for the fix, Copilot's PR body will follow that persona — direct, severity-grouped, concrete. That's the agent, skill, and MCP customizations *all* composing on one task.
-
-### 7.6 Take it further
-
-- **Fix another issue.** Run `/new` for a fresh session and pick a different one from the list.
-- **Try `search_code`.** Ask *"Where else in this repo do we swallow exceptions with a bare `except`?"* and watch Copilot use GitHub's code search across the whole repo.
-- **Combine with the `code-checklist` skill.** After opening the PR, ask *"Do a code quality check on the diff in my open PR."* The skill's five-section format will apply to the change set the MCP server fetches back.
-
----
-
-You now have a working `code-reviewer` agent, a `code-checklist` skill, **and** the GitHub MCP server wired into your Copilot CLI. Copy the `.github/` folder into a real repo whenever you're ready — your team gets the agent and skill for free, and turning on the MCP server is a one-flag change on their side.
+> **Recommended order:** 1 → 2 → 3 → 4. Modules 1 and 2 are independent; Module 3 needs both; Module 4 is standalone but is best after 1–3 so you can see MCP compose with an agent and a skill.

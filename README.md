@@ -265,13 +265,7 @@ Review books.py and tell me what you think.
 
 Read the response and note two or three things about it — probably a mix of style comments, general advice, and some correctness notes.
 
-Now exit (`/exit`) and start a new session, this time selecting your custom agent:
-
-```bash
-copilot
-```
-
-At the prompt, use the `/agents` command to see the list, then pick `code-reviewer`. Ask the same question:
+Now switch to your custom agent without leaving the session. Run the `/agent` command to browse and pick `code-reviewer` (or type `/agent code-reviewer` to select it directly). Then ask the same question:
 
 ```
 Review books.py and tell me what you think.
@@ -286,7 +280,7 @@ Regardless of which language you chose, the `code-reviewer` response should feel
 - The missing input validation on `title` and the case-insensitivity inconsistency in the search function are flagged specifically.
 - The tone is more direct — fewer hedges like "you might want to consider".
 
-If the output is still generic, double-check that you actually selected `code-reviewer` in `/agents` (Copilot shows the active agent in the prompt).
+If the output is still generic, double-check that you actually selected `code-reviewer` with `/agent` (Copilot shows the active agent in the prompt).
 
 ---
 
@@ -353,11 +347,7 @@ Return a single Markdown report with one section per category above, in the same
 
 ### 4.3 Try it out
 
-Start a new Copilot session (this time **without** selecting a custom agent — we want to see the skill acting on its own):
-
-```bash
-copilot
-```
+Start a fresh conversation (this time **without** a custom agent — we want to see the skill acting on its own). From your existing session, run `/new` to clear history, then `/agent` and pick the default agent so `code-reviewer` isn't active.
 
 Ask a request that clearly matches the skill's `description`:
 
@@ -388,13 +378,7 @@ Now let's run both at once.
 
 ### 5.2 Try it
 
-Start a new session and select the agent:
-
-```bash
-copilot
-```
-
-Use `/agents` and pick `code-reviewer`. Then ask:
+Switch to the agent with `/agent code-reviewer` (or run `/agent` and pick it from the list). Then ask:
 
 ```
 Do a code review of books.py against our team quality checklist.
@@ -426,7 +410,7 @@ Take two minutes to think about (or discuss with the person next to you):
 
 ### 6.1 Key takeaways
 
-- **Agent = persona.** You opt in with `/agents`. Changes *how* Copilot responds.
+- **Agent = persona.** You opt in with `/agent`. Changes *how* Copilot responds.
 - **Skill = playbook.** Auto-triggers via its `description`. Changes *what procedure* Copilot follows.
 - **They compose.** Selecting an agent doesn't disable skills — matching skills still load on top.
 - The `description` field is the most important line in a skill file. Vague descriptions don't trigger.

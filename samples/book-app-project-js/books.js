@@ -47,7 +47,13 @@ class BookCollection {
   }
 
   addBook(title, author, year) {
-    const book = new Book(title, author, year);
+    if (typeof title !== "string" || title.trim() === "") {
+      return false;
+    }
+    if (typeof author !== "string" || author.trim() === "") {
+      return false;
+    }
+    const book = new Book(title.trim(), author.trim(), year);
     this.books.push(book);
     this.saveBooks();
     return book;

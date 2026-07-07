@@ -430,6 +430,75 @@ Take two minutes to think about (or discuss with the person next to you):
 
 - **Share with your team.** Commit `.github/agents/` and `.github/skills/` in a real project. Everyone who clones gets your customizations for free.
 - **Write a second skill.** A `commit-message` skill (matches "write a commit message" prompts) or a `pr-description` skill are great next ones. Keep the `description` specific.
-- **Add MCP.** Once you're comfortable with agents and skills, look into MCP servers to give Copilot access to external tools (issue trackers, databases, docs) inside the same customization model.
+- **Add MCP.** Once you're comfortable with agents and skills, jump into **[Section 7 — Lab D](#section-7--lab-d-use-the-github-mcp-server-10-min)** to give Copilot access to real GitHub (issues, PRs, code search) via the built-in GitHub MCP server.
 
-You now have a working `code-reviewer` agent and a `code-checklist` skill in the workshop repo. Copy them into a real repo whenever you're ready.
+---
+
+## Section 7 — Lab D: Use the GitHub MCP server (10 min)
+
+### 7.1 What you're building
+
+Agents changed *how* Copilot thinks; skills changed *what procedure* it follows. Now let's change *what Copilot can reach*. In this lab you'll turn on the built-in **GitHub MCP server** in Copilot CLI, ask it to browse this workshop repo's issues, and drive an end-to-end fix: find an issue → edit code → open a PR — all from inside the same terminal session.
+
+### 7.2 Enable the GitHub MCP server
+
+Exit any running Copilot session, then start a new one with all GitHub MCP tools turned on:
+
+```bash
+copilot --enable-all-github-mcp-tools
+```
+
+Confirm the server is loaded and the full toolset is available:
+
+```
+/mcp show github-mcp-server
+```
+
+You should see the server listed with roughly 100 tools (e.g., `list_issues`, `create_pull_request`, `get_file_contents`, `search_code`, `create_issue`).
+
+> **Heads up.** MCP tool calls run **with your GitHub permissions**. Copilot will ask you to approve each call the first time. Read what it's about to do before clicking through — especially for write operations like `create_pull_request` or `create_issue`.
+
+### 7.3 Find an issue to fix
+
+This repo has a handful of open issues that map directly to the deliberate bugs in the `books` starter file you picked in Section 1. Ask Copilot to browse them:
+
+```
+List the open issues on this repository and summarize them.
+```
+
+Notice which tool Copilot calls (it should be `list_issues`). Then let Copilot triage for you:
+
+```
+Which of these issues would be the easiest to fix? Pick one for me.
+```
+
+### 7.4 Fix it and open a PR
+
+Now ask Copilot to do the whole loop — code change, commit, push, PR — in one prompt. Adjust the filename to whichever starter you're working in (`books.py` / `Books.cs` / `books.js`):
+
+```
+Fix that issue. Follow these steps:
+1. Check out a new local branch for the fix.
+2. Make the changes to books.py (adjust for your language).
+3. Run the code (or a quick manual check) to confirm the fix works.
+4. Commit and push the branch.
+5. Open a pull request that references the issue in its body (e.g., "Closes #N").
+```
+
+> ⚠️ **Review every write.** Copilot will call `create_pull_request` (and possibly `create_or_update_file`) via MCP. Read the diff summary and the PR title/body it proposes before approving.
+
+### 7.5 What to look for
+
+- Copilot narrates its **MCP tool calls** as it goes (`list_issues`, `get_file_contents`, `create_pull_request`, etc.). That's the MCP client at work — no glue code required from you.
+- The PR appears on GitHub, linked to the issue via `Closes #N`.
+- If you also select the `code-reviewer` agent from Lab A **before** asking for the fix, Copilot's PR body will follow that persona — direct, severity-grouped, concrete. That's the agent, skill, and MCP customizations *all* composing on one task.
+
+### 7.6 Take it further
+
+- **Fix another issue.** Run `/new` for a fresh session and pick a different one from the list.
+- **Try `search_code`.** Ask *"Where else in this repo do we swallow exceptions with a bare `except`?"* and watch Copilot use GitHub's code search across the whole repo.
+- **Combine with the `code-checklist` skill.** After opening the PR, ask *"Do a code quality check on the diff in my open PR."* The skill's five-section format will apply to the change set the MCP server fetches back.
+
+---
+
+You now have a working `code-reviewer` agent, a `code-checklist` skill, **and** the GitHub MCP server wired into your Copilot CLI. Copy the `.github/` folder into a real repo whenever you're ready — your team gets the agent and skill for free, and turning on the MCP server is a one-flag change on their side.

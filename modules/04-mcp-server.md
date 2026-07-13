@@ -101,12 +101,6 @@ Start a new Copilot session and confirm the server loaded:
 /mcp show azure-devops
 ```
 
-Then try it out:
-
-```
-List my active work items in the "Contoso" project and pick one I can knock out in under an hour.
-```
-
 > ⚠️ **Never commit secrets.** Reference tokens via `${env:VAR_NAME}` in `mcp.json` and keep the actual PAT in your shell environment or a secret manager — never inline in the JSON.
 
 ### More ideas

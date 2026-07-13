@@ -59,9 +59,59 @@ Fix that issue. Follow these steps:
 - The PR appears on GitHub, linked to the issue via `Closes #N`.
 - If you also select the `code-reviewer` agent from Module 1 **before** asking for the fix, Copilot's PR body will follow that persona — direct, severity-grouped, concrete. That's the agent, skill, and MCP customizations *all* composing on one task.
 
-## 6. Take it further
+## 6. Take it further — add more MCP servers
 
-- **Fix another issue.** Run `/new` for a fresh session and pick a different one from the list.
+The **GitHub MCP server is built in** to Copilot CLI (that's what you just enabled with `--enable-all-github-mcp-tools`). But MCP is an open protocol, and you can plug in any other server — Azure DevOps, Jira, Postgres, Playwright, your own internal APIs, etc. — by declaring them in an `mcp.json` config file.
+
+### Where to put `mcp.json`
+
+Drop an `mcp.json` (or `.mcp.json`) into your project so it's picked up whenever you launch Copilot from that repo — and commit it so your team gets the same servers:
+
+- **Project root:** `./.mcp.json` — simplest option, sits next to your `README.md`.
+- **`.github/` folder:** `./.github/mcp.json` — keeps it grouped with your other GitHub/Copilot config (workflows, `copilot-instructions.md`, etc.) and out of the root listing.
+
+### Example: Azure DevOps MCP server
+
+Add the [Azure DevOps MCP server](https://github.com/microsoft/azure-devops-mcp) so Copilot can list work items, read pipelines, and open PRs in ADO the same way it does for GitHub:
+
+```json
+{
+  "mcpServers": {
+    "azure-devops": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp",
+        "your-ado-organization"
+      ],
+      "env": {
+        "AZURE_DEVOPS_PAT": "${env:AZURE_DEVOPS_PAT}"
+      }
+    }
+  }
+}
+```
+
+Replace `your-ado-organization` with your ADO org name, then set the `AZURE_DEVOPS_PAT` environment variable to a [Personal Access Token](https://learn.microsoft.com/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate) with the scopes you need (e.g., Work Items: Read & Write, Code: Read & Write).
+
+Start a new Copilot session and confirm the server loaded:
+
+```
+/mcp list
+/mcp show azure-devops
+```
+
+Then try it out:
+
+```
+List my active work items in the "Contoso" project and pick one I can knock out in under an hour.
+```
+
+> ⚠️ **Never commit secrets.** Reference tokens via `${env:VAR_NAME}` in `mcp.json` and keep the actual PAT in your shell environment or a secret manager — never inline in the JSON.
+
+### More ideas
+
+- **Fix another issue.** Run `/new` for a fresh session and pick a different one from the GitHub issues list.
 - **Try `search_code`.** Ask *"Where else in this repo do we swallow exceptions with a bare `except`?"* and watch Copilot use GitHub's code search across the whole repo.
 - **Combine with the `code-checklist` skill.** After opening the PR, ask *"Do a code quality check on the diff in my open PR."* The skill's five-section format will apply to the change set the MCP server fetches back.
 

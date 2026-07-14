@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "65OW2Sn+VQg=",
+  "dgSpecHash": "frJHVub8W84=",
   "success": true,
-  "projectFilePath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj",
+  "projectFilePath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\singhy\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
     "C:\\Users\\singhy\\.nuget\\packages\\microsoft.codecoverage\\17.14.1\\microsoft.codecoverage.17.14.1.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj": {}
+    "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj": {
+    "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
+        "projectUniqueName": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
         "projectName": "BookApp",
-        "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
+        "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
         "packagesPath": "C:\\Users\\singhy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\obj\\",
+        "outputPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\singhy\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -337,14 +337,14 @@
         }
       }
     },
-    "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj": {
+    "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj",
         "projectName": "BookApp.Tests",
-        "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj",
+        "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\BookApp.Tests.csproj",
         "packagesPath": "C:\\Users\\singhy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\obj\\",
+        "outputPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\singhy\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -359,8 +359,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj": {
-                "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj"
+              "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj": {
+                "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj"
               }
             }
           }

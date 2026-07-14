@@ -8,7 +8,9 @@ A persona that tells Copilot: *"You are a senior engineer doing a code review. F
 
 ## 2. Create the agent file
 
-Save the following as `.github/agents/code-reviewer.md`:
+Save the following as `.github/agents/code-reviewer.agent.md`:
+
+> **Filename convention.** Custom agent files must end with `.agent.md` — GitHub only registers files in `.github/agents/` that match this pattern. See [Creating custom agents](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/create-custom-agents).
 
 ```markdown
 ---

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
+      "projectUniqueName": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
       "projectName": "BookApp",
-      "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
+      "projectPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\BookApp.csproj",
       "packagesPath": "C:\\Users\\singhy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\Projects\\agents-and-skills-workshop\\samples\\book-app-project-cs\\obj\\",
+      "outputPath": "C:\\Users\\singhy\\OneDrive - Microsoft\\Documents\\14thJuly\\agents-and-skills-workshop\\samples\\book-app-project-cs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\singhy\\AppData\\Roaming\\NuGet\\NuGet.Config"
